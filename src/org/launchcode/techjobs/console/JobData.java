@@ -9,7 +9,6 @@ import java.io.IOException;
 import java.io.Reader;
 import java.util.*;
 
-import static java.lang.String.CASE_INSENSITIVE_ORDER;
 
 /**
  * Created by LaunchCode
@@ -42,7 +41,7 @@ public class JobData {
                 values.add(aValue);
             }
         }
-        /** Collections.sort(values, CASE_INSENSITIVE_ORDER);   */
+
         return values;
     }
 
@@ -50,8 +49,6 @@ public class JobData {
 
         // load data, if not already loaded
         loadData();
-     /**   ArrayList<HashMap<String, String>> jobscopy = new ArrayList<>(allJobs);
-*/
         return allJobs;
     }
 
