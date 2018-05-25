@@ -12,7 +12,7 @@ public class TechJobs {
 
     private static Scanner in = new Scanner(System.in);
 
-    public static void main (String[] args) {
+    public static void main(String[] args) {
 
         // Initialize our field map with key/name pairs
         HashMap<String, String> columnChoices = new HashMap<>();
@@ -35,17 +35,12 @@ public class TechJobs {
             String actionChoice = getUserSelection("View jobs by:", actionChoices);
 
             if (actionChoice.equals("list")) {
-
                 String columnChoice = getUserSelection("List", columnChoices);
-
                 if (columnChoice.equals("all")) {
                     printJobs(JobData.findAll());
                 } else {
-
                     ArrayList<String> results = JobData.findAll(columnChoice);
-
                     System.out.println("\n*** All " + columnChoices.get(columnChoice) + " Values ***");
-
                     // Print list of skills, employers, etc
                     for (String item : results) {
                         System.out.println(item);
@@ -62,13 +57,23 @@ public class TechJobs {
                 String searchTerm = in.nextLine();
 
                 if (searchField.equals("all")) {
-                    System.out.println("Search all fields not yet implemented.");
-                } else {
-                    printJobs(JobData.findByColumnAndValue(searchField, searchTerm));
+                    ArrayList<HashMap<String, String>> jobList = JobData.findByValue(searchTerm);
+                    if (jobList.isEmpty()) {
+                        System.out.println("No Results");
+                    }
+                    printJobs(JobData.findByValue(searchTerm));
                 }
+             else{
+                ArrayList<HashMap<String, String>> jobList = JobData.findByColumnAndValue(searchField, searchTerm);
+                if (jobList.isEmpty()) {
+                    System.out.println("No Results");
+                }
+                printJobs(JobData.findByColumnAndValue(searchField, searchTerm));
             }
         }
     }
+}
+
 
     // ﻿Returns the key of the selected item from the choices Dictionary
     private static String getUserSelection(String menuHeader, HashMap<String, String> choices) {
